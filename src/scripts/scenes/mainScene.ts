@@ -12,6 +12,8 @@ export default class MainScene extends Phaser.Scene {
   private playerspeed: any;
   private chocolate: any;
   private bone: any;
+  private scoreLabel: any;
+  private score: any;
 
   constructor() {
     super({ key: 'MainScene' });
@@ -27,7 +29,7 @@ export default class MainScene extends Phaser.Scene {
     this.cursorKeys=this.input.keyboard.createCursorKeys();
     
     this.tennisball=this.physics.add.image(40, 90, "tennisball");
-    this.tennisball.setScale(.10).setVelocity(100,100).setCollideWorldBounds(true).setBounce(1);
+    this.tennisball.setScale(.08).setVelocity(150,170).setCollideWorldBounds(true).setBounce(1);
   
     this.bee=this.physics.add.image(0, 40, "bee");
     this.bee.setScale(0.06);
@@ -38,16 +40,17 @@ export default class MainScene extends Phaser.Scene {
     this.resetChocPos(this.chocolate);
 
     this.bone=this.physics.add.image(0, 0, "bone");
-    this.bone.setScale(0.1);
+    this.bone.setScale(0.08);
     this.resetBonePos(this.bone);
     
-
-    this.enemies=this.add.group();
-    this.enemies.add(this.bee);
+    this.scoreLabel=this.add.bitmapText(10,5,"pixelFont", "SCORE", 16);
+    this.score=0;
+    this.scoreLabel.text="SCORE: "+ this.score;
 
     this.physics.add.overlap(this.player, this.bee, this.beesHurt, undefined, this);
     this.physics.add.overlap(this.player, this.chocolate, this.chocolateBad, undefined, this);
     this.physics.add.overlap(this.player, this.bone, this.boneGood, undefined, this);
+    this.physics.add.overlap(this.player, this.tennisball, this.fetched, undefined, this);
   } 
 
   update() {
@@ -96,25 +99,42 @@ export default class MainScene extends Phaser.Scene {
     bone.y=Phaser.Math.Between(0, this.scale.width);
   }
 
+  resetTennisballPos(tennisball){
+    tennisball.x=Phaser.Math.Between(0, this.scale.width);
+    tennisball.y=Phaser.Math.Between(0, this.scale.height);
+  }
+
   beesHurt(player, bee){
+    this.score-=20;
     if (this.playerspeed>20){
       this.playerspeed-=20;
     }
     this.resetBeePos(bee);
+    this.scoreLabel.text="SCORE: "+ this.score;
   }
 
   chocolateBad(player, chocolate){
+    this.score-=30;
     if (this.playerspeed>30){
       this.playerspeed-=30;
     }
     this.resetChocPos(chocolate);
+    this.scoreLabel.text="SCORE: "+ this.score;
   }
 
   boneGood(player, bone){
+    this.score+=30;
     if (this.playerspeed<250){
       this.playerspeed+=30;
     }
     this.resetBonePos(bone);
+    this.scoreLabel.text="SCORE: "+ this.score;
+  }
+
+  fetched(player, tennisball){
+    this.score+=100;
+    this.resetTennisballPos(tennisball);
+    this.scoreLabel.text="SCORE: "+ this.score;
   }
 
   movePlayerManager(){
