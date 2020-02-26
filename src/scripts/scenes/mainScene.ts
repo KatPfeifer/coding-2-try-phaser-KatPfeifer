@@ -8,7 +8,6 @@ export default class MainScene extends Phaser.Scene {
   private cursorKeys: any;
   private tennisball: any;
   private bee: any;
-  private enemies: any;
   private playerspeed: any;
   private chocolate: any;
   private bone: any;
