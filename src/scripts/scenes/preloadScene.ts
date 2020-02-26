@@ -11,6 +11,9 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image('chocolate', "assets/images/chocolate.png");
     this.load.image('bone', "assets/images/bone.png");
     this.load.bitmapFont("pixelFont", "assets/font/font.png", "assets/font/font.xml");
+    this.load.audio('bark', "assets/audio/bark.mp3");
+    this.load.audio('music', "assets/audio/music.mp3");
+  
   }
 
   create() {

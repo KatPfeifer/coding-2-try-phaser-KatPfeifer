@@ -13,6 +13,8 @@ export default class MainScene extends Phaser.Scene {
   private bone: any;
   private scoreLabel: any;
   private score: any;
+  private bark: any;
+  private music: any;
 
   constructor() {
     super({ key: 'MainScene' });
@@ -41,7 +43,21 @@ export default class MainScene extends Phaser.Scene {
     this.bone=this.physics.add.image(0, 0, "bone");
     this.bone.setScale(0.08);
     this.resetBonePos(this.bone);
-    
+
+    this.bark=this.sound.add("bark");
+    this.music=this.sound.add("music");
+
+    let musicConfig = {
+      mute: false,
+      volume: 1,
+      rate: 1,
+      detune: 1,
+      seek: 1,
+      loop: false,
+      delay: 0
+    }
+
+    this.music.play(musicConfig);
     this.scoreLabel=this.add.bitmapText(10,5,"pixelFont", "SCORE", 16);
     this.score=0;
     this.scoreLabel.text="SCORE: "+ this.score;
@@ -131,6 +147,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   fetched(player, tennisball){
+    this.bark.play();
     this.score+=100;
     this.resetTennisballPos(tennisball);
     this.scoreLabel.text="SCORE: "+ this.score;
