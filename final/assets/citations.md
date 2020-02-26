@@ -13,3 +13,7 @@ Tennis Ball: https://www.cleanpng.com/free/tennis-ball.html
 Chocolate bar: https://www.pinclipart.com/pindetail/iRThJh_graphic-freeuse-bar-vector-illustration-transparent-background-chocolate/
 Bone: https://www.kissclipart.com/dog-bone-clipart-puppy-german-shepherd-clip-art-q63kev/download-clipart.html
 Font for score: https://ansimuz.itch.io/part-10-getting-started-with-phaser
+
+dog bark: http://www.orangefreesounds.com/single-yard-dog-woof/
+
+music: Happy Dreams https://www.fesliyanstudios.com/royalty-free-music/downloads-c/happy-music/2
